@@ -1,5 +1,20 @@
 # Gentera UI Design System 🎨✨
 
+### 📌 Source of Truth
+
+The Gentera UX Figma file can be found in [Design System Evolución](https://www.figma.com/files/1407742245893875276/project/505714474?fuid=1585110440822450563)
+
+- **The above Figma is the single source of truth**
+- All values (typography, spacing, radius, borders) come directly from design charts
+- No values should be invented nor hardcoded
+
+### 🔄 Mapping Rules
+| Figma                             | Android   | Why                     |
+|-----------------------------------|-----------|-------------------------|
+| Text sizes (px)                   | `sp`      | Accessibility scaling ♿ |
+| Spacing / Radius / Borders (px)   | `dp`      | Layout stability 📐 |
+
+
 Gentera UI is a **Compose-first Android design system**, built as an **Android Library**, aligned with **Modern Android Development (MAD)** and **Clean Architecture** principles.
 
 This document is the **authoritative reference** for all tokens, styles, and components exposed by the library.  
@@ -142,6 +157,45 @@ Components never access XML directly.
 
 ---
 
+### ✍️ Text Styles (Semantic)
+
+```kotlin
+Text(
+    text = "Title",
+    style = GenteraUITextStyles.h1
+)
+```
+
+Available:
+- 🅱️ `h1 … h5` (Bree)
+- 🆎 `bodyLarge | bodyMedium | bodySmall` (Inter)
+- 🏷️ `captionSmall | captionMedium`
+- 🔗 `linkSmall | linkMedium | linkLarge`
+
+Consumers never deal with font files or weights directly.
+
+---
+
+## ✅ Example Usage
+
+```kotlin
+GenteraUiTheme(windowWidthSizeClass) {
+    Column(
+        modifier = Modifier.padding(GenteraUISpacing.md)
+    ) {
+        Text(
+            text = "Title",
+            style = GenteraUITextStyles.h2
+        )
+
+        Text(
+            text = "Body",
+            style = GenteraUITextStyles.bodyMediumRegular
+        )
+    }
+}
+```
+
 ## 🔘 Buttons
 
 ### Variants
@@ -209,10 +263,7 @@ GenteraUIButton(
 ---
 
 ### 📸 Button Previews
-
-```markdown
-![Gentera Buttons Preview](docs/images/buttons_preview.png)
-```
+![Buttons preview](buttons.png)
 
 ---
 
